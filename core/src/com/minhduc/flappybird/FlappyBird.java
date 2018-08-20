@@ -41,7 +41,7 @@ public class FlappyBird extends ApplicationAdapter {
 	float birdY = 0;
 	float velocity = 0;
 
-	float gap = 400;
+	float gap = 380;
 	float[] tubeOffset = new float[numberOfTube];
 	float maxTubeOffset;
 	float tubeVelocity = 4;
@@ -97,7 +97,7 @@ public class FlappyBird extends ApplicationAdapter {
 
 		if(gameState == 1) {
 			if(Gdx.input.justTouched()) {
-				velocity = -20;
+				velocity = -21;
 			}
 
 			for(int i = 0; i < numberOfTube; i++) {
@@ -122,8 +122,8 @@ public class FlappyBird extends ApplicationAdapter {
 				batch.draw(topTube, tubeX[i], Gdx.graphics.getHeight() / 2 + gap / 2 + tubeOffset[i]);
 				batch.draw(bottomTube, tubeX[i], Gdx.graphics.getHeight() / 2 - gap / 2 - bottomTube.getHeight() + tubeOffset[i]);
 
-				topTubeRectangles[i] = new Rectangle(tubeX[i],Gdx.graphics.getHeight() / 2 + gap / 2 + tubeOffset[i], topTube.getWidth(), topTube.getHeight());
-				bottomTubeRectangles[i] = new Rectangle(tubeX[i],Gdx.graphics.getHeight() / 2 - bottomTube.getHeight() - gap / 2 + tubeOffset[i], bottomTube.getWidth(), bottomTube.getHeight());
+				topTubeRectangles[i] = new Rectangle(tubeX[i],Gdx.graphics.getHeight() / 2 + gap / 2 + tubeOffset[i] + 5, topTube.getWidth() - 10, topTube.getHeight() - 10);
+				bottomTubeRectangles[i] = new Rectangle(tubeX[i],Gdx.graphics.getHeight() / 2 - bottomTube.getHeight() - gap / 2 + tubeOffset[i] - 5, bottomTube.getWidth() - 10, bottomTube.getHeight() - 10);
 			}
 
 			if(birdY > 0 && birdY < Gdx.graphics.getHeight() + gap / 2) {
@@ -181,7 +181,7 @@ public class FlappyBird extends ApplicationAdapter {
 			}
 		}
 
-        shapeRenderer.end();
+//        shapeRenderer.end();
 
 	}
 
