@@ -97,7 +97,7 @@ public class FlappyBird extends ApplicationAdapter {
 
 		if(gameState == 1) {
 			if(Gdx.input.justTouched()) {
-				velocity = -25;
+				velocity = -20;
 			}
 
 			for(int i = 0; i < numberOfTube; i++) {
@@ -126,7 +126,7 @@ public class FlappyBird extends ApplicationAdapter {
 				bottomTubeRectangles[i] = new Rectangle(tubeX[i],Gdx.graphics.getHeight() / 2 - bottomTube.getHeight() - gap / 2 + tubeOffset[i], bottomTube.getWidth(), bottomTube.getHeight());
 			}
 
-			if(birdY > 0) {
+			if(birdY > 0 && birdY < Gdx.graphics.getHeight() + gap / 2) {
 				velocity += gravity;
 				birdY -= velocity;
 			} else {
@@ -140,8 +140,12 @@ public class FlappyBird extends ApplicationAdapter {
             }
         }
         else if(gameState == 2){
+			if(birdY > birds[flapState].getHeight() / 4) {
+				velocity += gravity;
+				birdY -= velocity;
+			}
 		    batch.draw(gameover, Gdx.graphics.getWidth() / 2 - gameover.getWidth() / 2, Gdx.graphics.getHeight() / 2 - gameover.getHeight() / 2);
-			if(Gdx.input.justTouched()) {
+			if(Gdx.input.justTouched() && birdY < birds[flapState].getHeight() / 4) {
 				Gdx.app.log("Touched", "Restart!");
 				startGame();
 				gameState = 0;
@@ -151,7 +155,7 @@ public class FlappyBird extends ApplicationAdapter {
 			}
         }
 
-        if (flapState == 0) {
+        if (flapState == 0 && gameState == 1) {
             flapState = 1;
         } else {
             flapState = 0;
